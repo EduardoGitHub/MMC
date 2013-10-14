@@ -84,6 +84,9 @@
       for ($i=0, $n=sizeof($this->browser_languages); $i<$n; $i++) {
         reset($this->languages);
         while (list($key, $value) = each($this->languages)) {
+			
+
+			
           if (eregi('^(' . $value . ')(;q=[0-9]\\.[0-9])?$', $this->browser_languages[$i]) && isset($this->catalog_languages[$key])) {
 			  
 			  

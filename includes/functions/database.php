@@ -146,4 +146,128 @@
       return $string;
     }
   }
+  
+  /**
+	 * 
+	 * Fun��o responsave por executar dados no banco de dados
+	 * @param string $table
+	 * @param array $values
+	 * @param string $parameters
+	 * @param string $action (salvar, alterar, remover, replace)
+	 */
+	function execute_db ($table, $values = '', $parameters = '', $action = 'salvar', $ver_sql = false)
+	{
+	    if ((isset($values)) && $values != '') reset($values);
+	    
+	    if ($action == 'salvar') {
+	        $query = 'insert into ' . $table . ' (';
+	        foreach ($values as $columns => $value) $query .= $columns . ', ';
+	        
+	        $query = substr($query, 0, - 2) . ') values (';
+	        
+	        if ((isset($values)) && $values != '')reset($values);
+	        
+	        foreach ($values as $columns => $value) {
+	            switch ((string) $value) {
+	                case 'now()':
+	                    $query .= 'now(), ';
+	                    break;
+	                case 'null':
+	                    $query .= 'null, ';
+	                    break;
+	                default:
+	                    $query .= '\'' . addslashes($value) . '\', ';
+	                    break;
+	            }
+	        }
+	        $query = substr($query, 0, - 2) . ')';
+	       if($ver_sql == true) echo $query;
+	    }elseif ($action == 'replace') {
+	        $query = 'replace into ' . $table . ' (';
+	        foreach ($values as $columns => $value) $query .= $columns . ', ';
+	        
+	        $query = substr($query, 0, - 2) . ') values (';
+	        
+	        if ((isset($values)) && $values != '')reset($values);
+	        
+	        foreach ($values as $columns => $value) {
+	            switch ((string) $value) {
+	                case 'now()':
+	                    $query .= 'now(), ';
+	                    break;
+	                case 'null':
+	                    $query .= 'null, ';
+	                    break;
+	                default:
+	                    $query .= '\'' . addslashes(utf8_decode($value)) . '\', ';
+	                    break;
+	            }
+	        }
+	        $query = substr($query, 0, - 2) . ')';
+	       if($ver_sql == true) echo $query;
+	    } elseif ($action == 'alterar') {
+	        $query = 'update ' . $table . ' set ';
+	        foreach ($values as $columns => $value) {
+	            switch ((string) $value) {
+	                case 'now()':
+	                    $query .= $columns . ' = now(), ';
+	                    break;
+	                case 'null':
+	                    $query .= $columns .= ' = null, ';
+	                    break;
+	                default:
+	                    $query .= $columns . ' = \'' . addslashes($value) . '\', ';
+	                    break;
+	            }
+	        }
+	        $query = substr($query, 0, - 2) . ' where ' . $parameters;
+	        if($ver_sql == true) echo $query;
+	    } elseif ($action == 'remover') {
+	        $query = 'delete from ' . $table . ' where ' . $parameters;
+	        if($ver_sql == true) echo $query;
+	    }
+	    return mysql_query($query)or die($query." ".mysql_error());
+	}
+
+
+/**
+	 * 
+	 * Fun��o para buscar dados no banco de dados
+	 * @param string $table
+	 * @param array $values
+	 * @param string $parameters
+	 * @param string $action	(listar)
+	 */
+	function process_db ($table, $values, $parameters = '', $action = 'listar', $ver_sql = false)
+	{
+	    if ((isset($values)) && $values != '*')reset($values);
+
+	    if ($action == 'listar') {
+	        if ((isset($values)) && $values != '*') {
+	            $query = 'select ';
+	           foreach ($values as $columns => $value) {
+	                $query .= $value . ', ';
+	            }
+	            $query = substr($query, 0, - 2) . ' from ' . $table . ' ' . $parameters;
+	        } else {
+	            $query = 'select * from ' . $table . ' ' . $parameters;
+	        }
+	        
+	        if($ver_sql == true) echo $query; // mostra a query que esta sendo executada no banco de dados
+	        //echo $query;
+
+		        $res = mysql_query($query);
+		        if($res){
+			        $ret = array();
+			        $num = mysql_num_rows($res);
+			        if ($num > 0) {
+			            for ($i = 0; $i < $num; $i ++) {
+			                $ret[] = mysql_fetch_array($res,MYSQL_ASSOC) or die(mysql_error());
+			            }
+			        }
+		        }
+	        
+	    }
+	    if(isset($ret))return $ret;
+	}
 ?>

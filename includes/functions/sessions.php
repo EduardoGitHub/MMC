@@ -81,8 +81,11 @@
 
   function tep_session_is_registered($variable) {
     return session_is_registered($variable);
+		/*
+	
 	//if(isset($_SESSION[$variable]))$r = true; else $r =  false;
 	return $r;
+	*/
   }
 
   function tep_session_unregister($variable) {

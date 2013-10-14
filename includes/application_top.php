@@ -28,7 +28,7 @@
   
 
 // Set the local configuration parameters - mainly for developers
-  if (file_exists('includes/local/configure.php')) include('includes/local/configure.php');
+  if (file_exists('includes/configure.php')) include('includes/configure.php');
 
 // include server parameters
   require('includes/configure.php');
@@ -322,9 +322,19 @@ if ($_SERVER["HTTPS"] == "on") $request_type = 'SSL' ; else $request_type = 'NON
 // set the application parameters
   $configuration_query = tep_db_query('select configuration_key as cfgKey, configuration_value as cfgValue from ' . TABLE_CONFIGURATION);
   while ($configuration = tep_db_fetch_array($configuration_query)) {
-    define($configuration['cfgKey'], $configuration['cfgValue']);
+	switch($configuration['cfgKey']){
+		case 'SEO_REWRITE_TYPE':
+		case 'SEO_CHAR_CONVERT_SET':
+		case 'SEO_REMOVE_ALL_SPEC_CHARS':
+		case 'SEO_URLS_CACHE_RESET':
+		case 'SEO_URLS_DB_UNINSTALL':
+		break;
+		default: define($configuration['cfgKey'], $configuration['cfgValue']);
+		
+	}
+    
   }
-  
+ 
   $textosLinks = array();
   $configuration_textos = tep_db_query('select text_titulo, text_id, text_local from ' . TABLE_EDIT_TEXT);
   while($textos = tep_db_fetch_array($configuration_textos)){

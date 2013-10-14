@@ -1,5 +1,17 @@
 <?php
   require('includes/application_top.php');
+  $action = $_REQUEST['action'];
+
+	switch ($action){
+		
+		case 'cadastroAfiliados':
+			require_once 'includes/classes/partner.php';
+			$p = new Partner();
+			$r = $p->newPartner($_POST);
+			echo json_encode($r);
+			break;
+			
+	}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html <?php echo HTML_PARAMS; ?>>
@@ -14,6 +26,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 <?php } ?>
 <base href="<?php echo (($request_type == 'SSL') ? HTTPS_SERVER : HTTP_SERVER) . DIR_WS_CATALOG; ?>" />
 <link rel="stylesheet" type="text/css" href="stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="includes/librays/jqueryAlerts/jquery.alerts.css" />
 <style>
 .boxafiliado{border:1px solid #EBEBEB; width:990px; margin:0 0 15px 0; padding:10px;}
 .boxafiliado ul{ list-style:none; margin:0; padding:0;}
@@ -25,6 +38,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 .tituloafiliado{ background-color:#ccc; color:#000; padding:5px; font-weight:bold}
 .atuacao ul{margin:0; padding:0; border:0;}
 .atuacao li{ float:left; width:230px; font-family:Tahoma; font-size:11px; padding:3px;}
+label.error { margin:2px 0 0 0; color:red;}
 </style>
 </head>
 <body>
@@ -40,12 +54,13 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
         <div style="height:30px; background-color:#F5E9BF; text-align:center; font-size:30px; padding:10px 0 10px 0; margin:15px 0 15px 0"> Faça seu cadastro e Aguarde nosso contato!</div>
       
       <div class="pagestexto">
-      		
+      		<form name="formAfiliados" id="formAfiliados" method="post">
+      		<input type="hidden" name="action" value="cadastroAfiliados" />
             <div class="tituloafiliado">Dados do Parceiro</div>	
       		<div class="boxafiliado">
   
             	<p class="float">*E-mail:<br />
-                <?=tep_draw_input_field('email_address','','size="40" maxlength="200"') ?>
+                <?=tep_draw_input_field('email_address','','size="40" maxlength="200" id="email_address"') ?>
                 </p>
                 
                 <p>*Confirme E-Mail:<br />
@@ -53,7 +68,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
                 </p>
                 
                 <p class="float">*Escolha uma Senha:<br />
-                <?=tep_draw_password_field('password','','size="40" maxlength="200"') ?>
+                <?=tep_draw_password_field('password','','size="40" maxlength="200" id="password"') ?>
                 </p>
                 
                 <p>*Confirmar Senha: <br />
@@ -67,7 +82,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
       		<div class="boxafiliado">
   
             	<p class="float">*CPF: <br />
-                <?=tep_draw_input_field('cpf','','size="40" maxlength="200"') ?>
+                <?=tep_draw_input_field('cpf','','size="40" maxlength="200" id="cpf"') ?>
                 </p>
                 
                 <p>*Nome:<br />
@@ -83,15 +98,15 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
                 </p>
                 
                 <p class="float">*Telefone Residencial (somente numeros): <br />
-                <?=tep_draw_input_field('telephone','','size="40" maxlength="200"') ?>
+                <?=tep_draw_input_field('telephone','','size="40" maxlength="200" id="telephone"') ?>
                 </p>
                 
                 <p>Fax (somente numeros): <br />
-                <?=tep_draw_input_field('fax','','size="40" maxlength="200"') ?>
+                <?=tep_draw_input_field('fax','','size="40" maxlength="200" id="fax"') ?>
                 </p>
                 
                 <p>Page Views (somente números: <br />
-                <?=tep_draw_input_field('pageviews','','size="40" maxlength="200"')// precisa ser incluso ?>
+                <?=tep_draw_input_field('pageviews','','size="40" maxlength="200" id="pageviews"')// precisa ser incluso ?>
                 </p>
                 
                 <p class="float">*URL ou endereço do perfil em rede social que será utilizado: <br />
@@ -113,31 +128,31 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
       		<div class="boxafiliado">
   
             	<p>*CEP  :<br />
-                <?=tep_draw_input_field('cep','','size="40" maxlength="200"') ?>
+                <?=tep_draw_input_field('postcode','','size="15" maxlength="9" id="postcode" ') ?>&nbsp;&nbsp;<input type="button" name="buscacep" id="buscacep" style="border: 0px; width: 65px; height: 18px; background-image: url('images/button-cep.gif'); cursor:pointer; " /><div id="validpostcode" style="color:#000000;" class="inputRequirement"></div>
                 </p>
                 
-                <p>*Endereço: <br />
-                <?=tep_draw_input_field('street_address','','size="40" maxlength="200"') ?>
+                <p  class="float">*Endereço: <br />
+                <?=tep_draw_input_field('street_address','','size="40" maxlength="200" id="street_address"') ?>
                 </p>
                 
                 <p class="float">*Numero: <br />
-                <?=tep_draw_input_field('street_number','','size="10" maxlength="200"') ?>
+                <?=tep_draw_input_field('street_number','','size="10" maxlength="200" id="street_number"') ?>
                 </p>
                 
                 <p>*Complemento: <br />
-                <?=tep_draw_input_field('complemento','','size="40" maxlength="200"') ?>
+                <?=tep_draw_input_field('complemento','','size="40" maxlength="200" ') ?>
                 </p>
                 
                 <p class="float">*Bairro: <br />
-                <?=tep_draw_input_field('suburb','','size="40" maxlength="200"') ?>
+                <?=tep_draw_input_field('suburb','','size="40" maxlength="200" id="suburb"') ?>
                 </p>
                 
                 <p class="float">*Cidade: <br />
-                <?=tep_draw_input_field('city','','size="40" maxlength="200"') ?>
+                <?=tep_draw_input_field('city','','size="40" maxlength="200" id="city"') ?>
                 </p>
                 
                 <p>*Estado: <br />
-                <?=tep_draw_input_field('state','','size="10" maxlength="200"') ?>
+                <?=tep_draw_input_field('state','','size="10" maxlength="2" id="state"') ?>
                 </p>
                 
                 <div style="clear:both"></div>
@@ -200,16 +215,95 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
                 <div style="clear:both"></div>
             </div>
             
-            
+            	<div style="text-align:right"><?=tep_image_submit('button_add_afiliados.jpg', IMAGE_BUTTON_CONTINUE);?></div>
+           </form> 
+   
       
       </div>
       
-      <div><a onclick="history.go(-1)" style="cursor:pointer"><?=tep_image_button('button_back.gif', IMAGE_BUTTON_BACK)?></a></div>
   </div>
   <br class="clearfloat" />
   <div id="footer"><?php require(DIR_WS_INCLUDES . 'footer.php'); ?></div>
-  <script type="text/javascript" src="includes/librays/on.scroll.js" ></script>
+  
 </div>
+<script type="text/javascript" src="includes/busca-cep.js"></script>
+  
+  <script type="text/javascript" src="includes/librays/jquery.form.js" ></script>
+  <script type="text/javascript" src="includes/librays/jquery.validate.min.js" ></script>
+  <script type="text/javascript" src="includes/librays/jqueryAlerts/jquery.alerts.js" ></script>
+
+  <script type="text/javascript">
+
+  
+  	// valida o formulário
+    $('#formAfiliados').validate({
+        // define regras para os campos  
+    	submitHandler: function(form) {   
+    	$(form).ajaxSubmit({
+    		dataType: "json",
+            type: "POST",
+            url: 'actions-json.php',
+    		success: function(data){   
+    			if(data.retorno == 0)
+    				alert('erro')
+    			else if(data.retorno == 1) alert('Salva com sucesso');
+        	}   
+        });
+	return false; 
+}, 
+	rules: {
+		email_address: { required: true,
+						 email: true},
+		email_address_cf: { required: true,
+			equalTo:'#email_address',
+			email: true
+		},
+		password: { required: true },
+		confirmation: { required: true,
+			equalTo:'#password' },
+		cpf: { required: true },
+		firstname: { required: true },
+		rg: { required: true },
+		orgaorg: { required: true },
+		telephone: { required: true },
+		url: { required: true },
+		company: { required: true },
+		postcode: { required: true },
+		street_address: { required: true },
+		street_number: { required: true },
+		suburb: { required: true },
+		city: { required: true },
+		state: { required: true }
+	 },
+        // define messages para cada campo
+        messages: {
+        	email_address: { required: 'Informe seu email.',
+							 email: 'Informe um e-mail válido'},
+			email_address_cf: { required: 'Confirme seu e-mail',
+								equalTo:'Seu e-mail não é o mesmo digitado acima. Favor verificar',
+								email: 'Informe um email valido'
+			},
+			password: { required: 'Informe sua senha' },
+			confirmation: { required: 'Confirme sua senha',
+				equalTo:'Sua senha esta incorreta. Favor verificar' },
+			cpf: { required:  'Informe seu CPF' },
+			firstname: { required: 'Informe seu nome' },
+			rg: { required: 'Informe seu RG' },
+			orgaorg: { required: 'Informe o Orgão Expeditor' },
+			telephone: { required: 'Informe seu telefone' },
+			url: { required: 'Informe a URL do seu site e ou blog' },
+			company: { required: 'Informe o responsavel legal' },
+			postcode: { required: 'Informe seu CEP' },
+			street_address: { required: 'Informe seu endereço' },
+			street_number: { required: 'Informe o numero de sua residencia' },
+			suburb: { required: 'Informe seu Bairro' },
+			city: { required: 'Informe a Cidade' },
+			state: { required: 'Informe o Estado' }
+        }
+    });
+  
+  
+  </script>
 </body>
 </html>
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>
