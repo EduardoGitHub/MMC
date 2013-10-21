@@ -109,8 +109,8 @@ label.error { margin:2px 0 0 0; color:red;}
                 <?=tep_draw_input_field('pageviews','','size="40" maxlength="200" id="pageviews"')// precisa ser incluso ?>
                 </p>
                 
-                <p class="float">*URL ou endereço do perfil em rede social que será utilizado: <br />
-                <?=tep_draw_input_field('url','','size="40" maxlength="200"')// precisa ser incluso ?>
+                <p class="float">*URL ou endereço do perfil que será utilizado: <br />
+                <?=tep_draw_input_field('urle','','size="40" maxlength="200"')// precisa ser incluso ?>
                 </p>
                 
                 <p>*Responsável pleo Site: <br />
@@ -197,24 +197,10 @@ label.error { margin:2px 0 0 0; color:red;}
                 <div style="clear:both"></div>
              </div>
              
-             <div class="tituloafiliado">Produto que deseja Avaliar</div>	
-      		<div class="boxafiliado">
-  
-            	<p class="float">Nome do Prudoto:<br />
-                <?=tep_draw_input_field('produto','','size="40" maxlength="200"') ?>
-                </p>
-                
-                <p>Tamanho:<br />
-                <?=tep_draw_input_field('tamanho','','size="40" maxlength="200"') ?>
-                </p>
-                
-                <p class="float">* Campos obrigatórios</p>
-                
-                
-                
-                <div style="clear:both"></div>
-            </div>
-            
+			<iframe src="contrato.html" height="100" width="1000" style="border:1px solid #ccc"></iframe>
+            <p  class="float"><input type="checkbox" name="adesao" id="adesao" />Li e aceito o nosso contrato de adesão <br />
+               
+             </p>
             	<div style="text-align:right"><?=tep_image_submit('button_add_afiliados.jpg', IMAGE_BUTTON_CONTINUE);?></div>
            </form> 
    
@@ -273,7 +259,8 @@ label.error { margin:2px 0 0 0; color:red;}
 		street_number: { required: true },
 		suburb: { required: true },
 		city: { required: true },
-		state: { required: true }
+		state: { required: true },
+		adesao: { required: true }
 	 },
         // define messages para cada campo
         messages: {
@@ -298,7 +285,8 @@ label.error { margin:2px 0 0 0; color:red;}
 			street_number: { required: 'Informe o numero de sua residencia' },
 			suburb: { required: 'Informe seu Bairro' },
 			city: { required: 'Informe a Cidade' },
-			state: { required: 'Informe o Estado' }
+			state: { required: 'Informe o Estado' },
+			adesao: { required: 'Você não aceitor nosso contrato de adesão.' }
         }
     });
   

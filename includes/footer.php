@@ -116,6 +116,7 @@
         </div>
         <div style="clear:both"></div>
 </div> 
+<!--
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -124,7 +125,9 @@
   js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
+-->
 <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4e7c9a053b9bc07e"></script>
+
 <script type="text/javascript" src="includes/librays/jquery.js" ></script>
 <script type="text/javascript" src="includes/librays/jquery.corner.js" ></script>
 <script type="text/javascript" src="includes/librays/slider/jquery.moodular.js?v3.1"></script>
@@ -133,12 +136,6 @@
 <script src="includes/librays/elastislide/modernizr.custom.17475.js"></script>
 <script type="text/javascript" src="includes/librays/elastislide/jquerypp.custom.js"></script>
 <script type="text/javascript" src="includes/librays/elastislide/jquery.elastislide.js"></script>
-<? if(ENTRY_LINK_TWITTER != ''){?>
-<!--<script type="text/javascript" src="includes/librays/twitter/jquery.mousewheel.js"></script>
-<script type="text/javascript" src="includes/librays/twitter/jScrollPane-1.2.3.min.js"></script>
-<script type="text/javascript">var tweetUsers = ['<?=ENTRY_LINK_TWITTER?>'];</script>
-<script type="text/javascript" src="includes/librays/twitter/script.js"></script>-->
-<? } ?>
 <script language="javascript" type="text/javascript">
 jQuery(document).ready(function () {
 	jQuery('#demo').moodular({

@@ -33,7 +33,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 <body>
 <div id="header"><?php require(DIR_WS_INCLUDES . 'header.php'); ?></div>
 <div id="container">
-  <div id="mainContent">
+  <div id="mainContent" style="margin:5px;">
   
   <div class="tituloCompra"><b><?=HEADING_TITLE; ?></b></div>
   <?php if ($messageStack->size('account') > 0) { ?>
@@ -139,6 +139,15 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
                   </tr>
                   <tr>
                     <td class="main"><?php echo tep_image(DIR_WS_IMAGES . 'arrow_green.gif') . ' <a href="' . tep_href_link(FILENAME_ACCOUNT_PASSWORD, '', 'SSL') . '">' . MY_ACCOUNT_PASSWORD . '</a>'; ?></td>
+                  </tr>
+                  <tr>
+                    <td class="main"><?php
+                    $afiliados = process_db(TABLE_PARTNERS, array('partner_id'), 'WHERE customers_id='.(int)$customer_id);
+                    $num = count($afiliados);
+                    if($num > 0){
+                    	echo tep_image(DIR_WS_IMAGES . 'arrow_green.gif') . ' <a href="' . tep_href_link(FILENAME_ACCOUNT_PASSWORD, '', 'SSL') . '">Painel de Afiliados</a>'; 
+                    }
+                    ?></td>
                   </tr>
                 </table></td>
                 <td width="10" align="right"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>

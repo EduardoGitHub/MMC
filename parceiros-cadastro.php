@@ -53,8 +53,8 @@ label.error { margin:2px 0 0 0; color:red;}
         <div style="height:30px; background-color:#F5E9BF; text-align:center; font-size:30px; padding:10px 0 10px 0; margin:15px 0 15px 0"> Informe seus dados e entre em contato conosco!</div>
       
       <div class="pagestexto">
-      		<form name="formAfiliados" id="formAfiliados" method="post">
-      		<input type="hidden" name="action" value="cadastroAfiliados" />
+      		<form name="formParceiros" id="formParceiros" method="post">
+      		<input type="hidden" name="action" value="cadastroParceiros" />
             <div class="tituloafiliado">Dados do Cadastrais</div>	
       		<div class="boxafiliado">
   				
@@ -67,7 +67,7 @@ label.error { margin:2px 0 0 0; color:red;}
                 </p>
                 
                 <p>*Confirme E-Mail:<br />
-                <?=tep_draw_input_field('email_address_cf','','size="40" maxlength="200"') ?>
+                <?=tep_draw_input_field('email_address_cf','','size="40" maxlength="200" id="email_address_cf"') ?>
                 </p>
                 
                 <p class="float">*Telefone <br />
@@ -75,7 +75,7 @@ label.error { margin:2px 0 0 0; color:red;}
                 </p>
                 
                 <p class="float">*CEP <br />
-                <?=tep_draw_input_field('cep','','size="40" maxlength="200" id="cep"') ?>
+                <?=tep_draw_input_field('postcode','','size="40" maxlength="200" id="cep"') ?>
                 </p>
                 <div style="clear:both"></div>
             </div>
@@ -84,28 +84,28 @@ label.error { margin:2px 0 0 0; color:red;}
             <div class="tituloafiliado">Informações da Mídia (Blog, Site ou Rede Social)</div>	
       		<div class="boxafiliado">
   
-            	<p class="float">*Page Views: <span style="color:#999; font-size:10px; font-style:italic">(somente numeros)</span><br />
+            	<p class="float">Page Views: <span style="color:#999; font-size:10px; font-style:italic">(somente numeros)</span><br />
                 <?=tep_draw_input_field('pagaviews','','size="40" maxlength="10" id="pagaviews"') ?>
                 </p>
                 
-                <p>*Fãs ou Amigo - Informe para Rede Social: <span style="color:#999; font-size:10px; font-style:italic">(somente numeros)</span><br />
+                <p>Fãs ou Amigo - Informe para Rede Social: <span style="color:#999; font-size:10px; font-style:italic">(somente numeros)</span><br />
                 <?=tep_draw_input_field('fan','','size="40" maxlength="200"') ?>
                 </p>
                 
                 <p class="float">*URL ou endereço do perfil que será utilizado: <br />
-                <?=tep_draw_input_field('rg','','size="40" maxlength="200"') ?>
+                <?=tep_draw_input_field('urle','','size="40" maxlength="200" id="urle"') ?>
                 </p>
                 
                 <p>*Responsável pelo Site: <br />
-                <?=tep_draw_input_field('responsavel','','size="40" maxlength="200"');//precisa de ser incluso ?>
+                <?=tep_draw_input_field('responsavel','','size="40" maxlength="200" id="responsavel"');//precisa de ser incluso ?>
                 </p>
                 
-                <p class="float">*Area de Atuação: <br />
+                <p class="float">Area de Atuação: <br />
                 <?=tep_draw_input_field('area','','size="40" maxlength="200" id="area"') ?>
                 </p>
 
-                <p>Descrição: <br />
-                	<textarea cols="5" rows="5" name="desc"></textarea>
+                <p>Descrição:<br />
+                	<?=tep_draw_input_field('desc','','size="40" id="area" style="height:50px;"') ?>
                 </p>
                 
                 <div style="clear:both"></div>
@@ -115,7 +115,7 @@ label.error { margin:2px 0 0 0; color:red;}
              <div class="tituloafiliado">Produto que deseja Avaliar</div>	
       		<div class="boxafiliado">
   
-            	<p class="float">Nome do Prudoto:<br />
+            	<p class="float">Nome do Produto:<br />
                 <?=tep_draw_input_field('produto','','size="40" maxlength="200"') ?>
                 </p>
                 
@@ -132,8 +132,6 @@ label.error { margin:2px 0 0 0; color:red;}
             
                 <div style="text-align:right"><?=tep_image_submit('button_send_partner.jpg', IMAGE_BUTTON_CONTINUE);?></div>
            </form> 
-   
-      
       </div>
       
       
@@ -142,8 +140,6 @@ label.error { margin:2px 0 0 0; color:red;}
   <div id="footer"><?php require(DIR_WS_INCLUDES . 'footer.php'); ?></div>
   
 </div>
-<script type="text/javascript" src="includes/busca-cep.js"></script>
-  
   <script type="text/javascript" src="includes/librays/jquery.form.js" ></script>
   <script type="text/javascript" src="includes/librays/jquery.validate.min.js" ></script>
   <script type="text/javascript" src="includes/librays/jqueryAlerts/jquery.alerts.js" ></script>
@@ -152,7 +148,7 @@ label.error { margin:2px 0 0 0; color:red;}
 
   
   	// valida o formulário
-    $('#formAfiliados').validate({
+    $('#formParceiros').validate({
         // define regras para os campos  
     	submitHandler: function(form) {   
     	$(form).ajaxSubmit({
@@ -174,22 +170,12 @@ label.error { margin:2px 0 0 0; color:red;}
 			equalTo:'#email_address',
 			email: true
 		},
-		password: { required: true },
-		confirmation: { required: true,
-			equalTo:'#password' },
-		cpf: { required: true },
 		firstname: { required: true },
-		rg: { required: true },
-		orgaorg: { required: true },
 		telephone: { required: true },
-		url: { required: true },
-		company: { required: true },
+		urle: { required: true },
 		postcode: { required: true },
-		street_address: { required: true },
-		street_number: { required: true },
-		suburb: { required: true },
-		city: { required: true },
-		state: { required: true }
+		responsavel: { required: true }
+		
 	 },
         // define messages para cada campo
         messages: {
@@ -199,22 +185,15 @@ label.error { margin:2px 0 0 0; color:red;}
 								equalTo:'Seu e-mail não é o mesmo digitado acima. Favor verificar',
 								email: 'Informe um email valido'
 			},
-			password: { required: 'Informe sua senha' },
-			confirmation: { required: 'Confirme sua senha',
-				equalTo:'Sua senha esta incorreta. Favor verificar' },
-			cpf: { required:  'Informe seu CPF' },
+			
+
 			firstname: { required: 'Informe seu nome' },
-			rg: { required: 'Informe seu RG' },
-			orgaorg: { required: 'Informe o Orgão Expeditor' },
 			telephone: { required: 'Informe seu telefone' },
-			url: { required: 'Informe a URL do seu site e ou blog' },
-			company: { required: 'Informe o responsavel legal' },
+			urle: { required: 'Informe a URL do seu site e ou blog' },
+			
 			postcode: { required: 'Informe seu CEP' },
-			street_address: { required: 'Informe seu endereço' },
-			street_number: { required: 'Informe o numero de sua residencia' },
-			suburb: { required: 'Informe seu Bairro' },
-			city: { required: 'Informe a Cidade' },
-			state: { required: 'Informe o Estado' }
+			responsavel: { required: 'O nome do responsavel' }
+			
         }
     });
   

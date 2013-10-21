@@ -524,5 +524,6 @@ if ($defaultTags['meta_canonical']) echo (tep_not_null($canonical_url) ? ' <link
 ?>
 
 <!--start of Offerchat js code-->
+<!--
 <script type='text/javascript'>var ofc_key = 'cd738ef6b23515619ad944eb50d61cda';(function(){  var oc = document.createElement('script'); oc.type = 'text/javascript'; oc.async = true;  oc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'www.offerchat.com/offerchat_widget.min.js?r='+ Math.random();  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(oc, s);}());</script>
 <!--end of Offerchat js code-->

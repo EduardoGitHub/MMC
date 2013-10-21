@@ -247,6 +247,9 @@ form{ padding:0; margin:0;}
     	<div style="clear:both"></div>
     </div>
     
+    <div style="clear:both"></div>    
+    
+    
     
     <div style="width:970px; float:left; margin:20px 0 0 0">
 		
@@ -262,6 +265,26 @@ form{ padding:0; margin:0;}
             </ul>
         </div>
         <div style="clear:both"></div>
+        
+        <br /><br />
+        <div style="font-family:Tahoma; font-weight:bold; padding:10px 0 0 50px;">Outros Produtos</div>
+    	<div style="width:950px; margin:0 auto;">
+            <ul id="carousel2" class="elastislide-list">
+                <?
+                $products_others = tep_db_query("select pd.products_name, p.products_id, p.products_image, p.products_price,  IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from PRODUCTS_DESCRIPTION  pd, PRODUCTS p left join SPECIALS s on p.products_id = s.products_id , PRODUCTS_TO_CATEGORIES p2c where p.products_status = '1' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and p2c.categories_id =".$cPath." order by rand() LIMIT 8");
+                while ($others = tep_db_fetch_array($products_others)) {
+                    echo '<li style="height:200px"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $others['products_id']).'">' . tep_image_produto(DIR_WS_IMAGES_PRODUTOS . $others['products_image'], $others['products_name'], 'YES','SPPE', 'vspace="0"') . '</a>
+						<center><a class="pr_name" style="font-size:10px" href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $others['products_id']) . '"><strong><b>'.$others['products_name'].'</b></strong></a>
+						<br/>
+						<span class="pr_price">por: '.$currencies->display_price($others['products_price'], tep_get_tax_rate($others['products_tax_class_id'])) . '</span><br /><span class="textdesconto">' . tep_display_parcela($others['products_price']).'</span>
+						</center>
+					
+					</li>';
+					// '.tep_discount_products($others['products_id']).'
+                }
+                ?>
+            </ul>
+		</div>
         
         <div style="text-align:center; padding-top:10px"><a href="<?=tep_href_link('informacoes-tecnicas-i-22.html');?>" style="font-family:Tahoma; font-size:13px">Informações Técnicas e Recomendações</a></div>
         
@@ -297,25 +320,7 @@ form{ padding:0; margin:0;}
              ?>
 			
         </div> 
-       <br /><br />
-        <div style="font-family:Tahoma; font-weight:bold; padding:10px 0 0 50px;">Outros Produtos</div>
-    	<div style="width:950px; margin:0 auto;">
-            <ul id="carousel2" class="elastislide-list">
-                <?
-                $products_others = tep_db_query("select pd.products_name, p.products_id, p.products_image, p.products_price,  IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from PRODUCTS_DESCRIPTION  pd, PRODUCTS p left join SPECIALS s on p.products_id = s.products_id , PRODUCTS_TO_CATEGORIES p2c where p.products_status = '1' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and p2c.categories_id =".$cPath." order by rand() LIMIT 8");
-                while ($others = tep_db_fetch_array($products_others)) {
-                    echo '<li style="height:200px"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $others['products_id']).'">' . tep_image_produto(DIR_WS_IMAGES_PRODUTOS . $others['products_image'], $others['products_name'], 'YES','SPPE', 'vspace="0"') . '</a>
-						<center><a class="pr_name" style="font-size:10px" href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $others['products_id']) . '"><strong><b>'.$others['products_name'].'</b></strong></a>
-						<br/>
-						<span class="pr_price">por: '.$currencies->display_price($others['products_price'], tep_get_tax_rate($others['products_tax_class_id'])) . '</span><br /><span class="textdesconto">' . tep_display_parcela($others['products_price']).'</span>
-						</center>
-					
-					</li>';
-					// '.tep_discount_products($others['products_id']).'
-                }
-                ?>
-            </ul>
-		</div>
+       
        
       <!--  
         <div style="font-family:Tahoma; font-weight:bold; padding:10px 0 0 50px">Destaques</div>

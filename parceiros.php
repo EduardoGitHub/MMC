@@ -49,7 +49,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
         
         <p style="text-indent:35px; font-size:25px;  color:#666; padding-bottom:15px; text-align:left">Participar do nosso programa de afiliados é muito simples e vantajoso. Com a publicação de banners, ofertas e links, você divulga nossos produtos e é comissionado toda vez que uma venda for realizada por meio desse canal.</p>
         
-        <p style="text-align:right"><img src="images/saiba_mais_afiliados.png" /></p>
+        <p style="text-align:right"><a href="afiliados.html"><img src="images/saiba_mais_afiliados.png" /></a></p>
         
         
         <div style="clear:both"></div>
@@ -104,7 +104,6 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
             <p style="font-size:28px; color:#B79205; text-align:right; padding-right:50px; font-weight:normal;">Walter Grando</p>
       	</div>
       
-      <div><br /><a onclick="history.go(-1)" style="cursor:pointer"><?=tep_image_button('button_back.gif', IMAGE_BUTTON_BACK)?></a></div>
   </div>
   <br class="clearfloat" />
   <div id="footer"><?php require(DIR_WS_INCLUDES . 'footer.php'); ?></div>

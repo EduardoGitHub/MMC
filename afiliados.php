@@ -39,21 +39,23 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
         <p style="text-indent:35px; font-size:20px;  color:#666; padding-bottom:15px">Participar do nosso programa de afiliados é muito simples e vantajoso. com a publicação de banners, ofernas e links, você divulga nossos produtos no seu canal (Site, Blog ou redes Sociais) e é comissionado toda vez que uma venda for realizada atarvés da mesma.</p>
         
         <div class="menuAfiliados">
-        	<div class="navigation">
+        	
         	<ul>
+            	<div class="navigation">
             	<li style="list-style:none"><a href="#como-anunciar" class="nav-active">Como anunciar?</a></li>
                 <li><a href="#quanto-voce-ganha">Quanto você ganha?</a></li>
                 <li><a href="#perguntas-frequentes">Perguntas Frequentes</a></li>
-                <li><a href="cadastro-afiliados.html">Cadastra-se Agora</a></li>
+                </div>
+                <li><a href="afiliados-cadastro.php">Cadastra-se Agora</a></li>
             </ul>
-            </div>
+            
         </div>
         
         <img src="images/afiliados-explicaco.jpg" alt="Explicação de como funciona" />
         <br /><br /><br /><br /><br />
         
         <div style="width:50%; text-align:center; float:left; color:#464A49; font-size:25px;">Transforme seu site, blog ou<br /> Rede Social<br /> no sue melhor negócio!</div>
-        <div style="width:50%; text-align:center; float:right"><a href="cadastro-afiliados.html"><img src="images/afiliados-castrase-grande.jpg" /></a></div>
+        <div style="width:50%; text-align:center; float:right"><a href="afiliados-cadastro.php"><img src="images/afiliados-castrase-grande.jpg" /></a></div>
         <div style="clear:both"></div>
       
       <div class="pagestexto">
