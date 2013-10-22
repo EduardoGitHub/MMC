@@ -1,5 +1,26 @@
 <?php
   require('includes/application_top.php');
+  require_once("includes/modules/email/class.phpmailer.php");
+  
+  if (isset($HTTP_POST_VARS['action']) && ($HTTP_POST_VARS['action'] == 'process')) {
+    
+	 $html = '<b>Nome:</b> '.$_POST['firstname'].'<br />
+	 		  <b>E-mail:</b> '.$_POST['email_address'].'<br />
+			  <b>Telefone:</b>'.$_POST['telephone'].'<br />
+			  <b>CEP:</b></td>'.$_POST['postcode'].'<br />
+			  <b>Page Views:</b>'.$_POST['pagaviews'].'<br />
+			  <b>Fãs ou Amigo</b> '.$_POST['fan'].'<br />
+			  <b>URL ou endereço do perfil:</b> '.$_POST['urle'].'<br />
+			  <b>Responsavel pelo Site:</b> '.$_POST['responsavel'].'<br />
+			  <b>Area de Atuação:</b> '.$_POST['area'].'<br />
+			  <b>Descrição:</b> '.$_POST['desc'].'<br />
+			  <b>Nome do Produto:</b> '.$_POST['produto'].'<br />
+			  <b>Tamanho:</b></td> '.$_POST['tamanho'];
+				
+      tep_sendMail('parceiro@mudominhacasa.com.br', 'Parceria '.$_POST['sessao'], $html, $_POST['firstname'], $_POST['email_address']);
+	  tep_redirect(tep_href_link('parceiros-sucesso.php', '', 'SSL'));
+	
+  }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html <?php echo HTML_PARAMS; ?>>
@@ -51,8 +72,9 @@ Para este tipo de parceria não é permitida a escolha de adesivos da linha de per
       <br />
       
       <div class="pagestexto">
-      		<form name="formParceiros" id="formParceiros" method="post">
-      		<input type="hidden" name="action" value="cadastroParceiros" />
+      		<form name="formParceiros" id="formParceiros" method="post" action="avaliacao-de-produtos.php">
+      		<input type="hidden" name="action" value="process" />
+            <input type="hidden" name="sessao" value="Avaliação de Produto" />
             <div class="tituloafiliado">Dados do Cadastrais</div>	
       		<div class="boxafiliado">
   				
@@ -145,20 +167,7 @@ Para este tipo de parceria não é permitida a escolha de adesivos da linha de per
   
   	// valida o formulário
     $('#formParceiros').validate({
-        // define regras para os campos  
-    	submitHandler: function(form) {   
-    	$(form).ajaxSubmit({
-    		dataType: "json",
-            type: "POST",
-            url: 'actions-json.php',
-    		success: function(data){   
-    			if(data.retorno == 0)
-    				alert('erro')
-    			else if(data.retorno == 1) alert('Salva com sucesso');
-        	}   
-        });
-	return false; 
-}, 
+        // define regras para os campos   
 	rules: {
 		email_address: { required: true,
 						 email: true},
