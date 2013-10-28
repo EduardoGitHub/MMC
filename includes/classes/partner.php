@@ -7,12 +7,12 @@ class Partner{
 		
 		$dadosCustomers = array(
 			'customers_type_register' 	=> 'P',//Parceiros      
-			'customers_firstname' 		=>  $dados['firstname'],        
+			'customers_firstname' 		=> $dados['firstname'],
 			'customers_rg' 				=> $dados['rg'],                 
 			'customers_cpf' 			=> $dados['cpf'],                
 			'customers_email_address' 	=> $dados['email_address'],     
 			//'customers_default_address_id' => 
-			'customers_telephone' 		=>   $dados['telephone'],       
+			'customers_telephone' 		=> $dados['telephone'],
 			'customers_newsletter' 		=> 1,                  
 			'customers_revendedor' 		=> 0,        
 			'customers_fax' 			=> $dados['fax'],               
@@ -22,7 +22,7 @@ class Partner{
 		execute_db(TABLE_CUSTOMERS, $dadosCustomers);
 		$idCustomers = mysql_insert_id();
 		
-		//Pega areas de atuaÁ„o
+		//Pega areas de atuaÔøΩÔøΩo
 			$atuacao = $dados['area'];
 			$numReg = count($atuacao);
 			$dadosAtua = '';
@@ -62,16 +62,16 @@ class Partner{
 		
 		);
 		execute_db(TABLE_ADDRESS_BOOK, $dadosEndereco);
-		
-		
+
+        define('EMAIL_SUBJECT', 'Bem Vindo - ' . STORE_NAME);
 		$html = '<table width="760" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #CCC; padding:15px; background-color:#D7AB00" align="center">
 		  
           <tr>
 			<td>
             	<table width="100%" border="0" cellspacing="0" cellpadding="0">
                   <tr>
-                    <td width="56%" rowspan="2" align="center">'.$dados['firstname'].'®&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><span style="font-size:20px">Seja</span><br><span style="font-size:40px">Bem Vindo!</span></td>
-                    <td width="44%"><img src="images/mail/mudominhacasa.png" width="332" height="59"/></td>
+                    <td width="56%" rowspan="2" align="center">'.$dados['firstname'].' - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><span style="font-size:20px">Seja</span><br><span style="font-size:40px">Bem Vindo!</span></td>
+                    <td width="44%"><img src="http://www.mudominhacasa.com.br/images/mail/mudominhacasa.png" width="332" height="59"/></td>
                   </tr>
                   <tr>
                     <td style="color:#000; font-weight:bold; text-align:right; padding-right:3px;">wwww.mudominhacasa.com.br</td>
@@ -84,18 +84,21 @@ class Partner{
 			<td class="texto">
             	<table width="760" border="0" cellspacing="0" cellpadding="0" style="background-color:#FFF; margin:5px">
                   <tr>
-                    <td style="padding:5px"><p style="font-size:30px; text-align:center">Adesivos de Parede para DecoraÁ„o da sua Casa, Quarto ou EscritÛrio!</p><br>
+                    <td style="padding:5px"><p style="font-size:30px; text-align:center">Adesivos de Parede para Decora√ß√£o da sua Casa, Quarto ou Escrit√≥rio!</p><br>
 
-<p style="text-align:center">O Mudominhacasa.com tem o prazer de lhe dar boas vindas, tendo em vista a sua recente inclus„o em nosso cadastro de clientes.  </p>      	
+<p style="text-align:center">O Mudominhacasa.com tem o prazer de lhe dar boas vindas, tendo em vista a sua recente inclus√£o em nosso cadastro de clientes.  </p>
 <p style="text-indent:15px; text-align:justify">
-Na nossa loja virtual vocÍ confere uma enorme variedade de adesivos decorativos para todos os tipos de ambientes e com tem·ticas atuais. Nossos modelos s„o modernos e descolados, e ajudam a personalizar qualquer ambiente com um toque de requinte. S„o adesivos criativos que abordam diversas categorias e assuntos com grande apelo artÌstico. NÛs queremos realmente recriar as paredes brancas e os mÛveis comuns.</p><br>  Confira abaixo alguns serviÁos que vocÍ j· pode desfrutar:<br><br>
+Na nossa loja virtual voc√™ confere uma enorme variedade de adesivos decorativos para todos os tipos de ambientes e com tem√°ticas atuais. Nossos modelos s√£o modernos e
+descolados, e ajudam a personalizar qualquer ambiente com um toque de requinte.
+S√£o adesivos criativos que abordam diversas categorias e assuntos com grande apelo art√≠stico. N√≥s queremos realmente recriar as paredes brancas e os m√≥veis comuns.</p><br>
+Confira abaixo alguns servi√ßos que voc√™ j√° pode desfrutar:<br><br>
 </td>
                   </tr>
                   <tr>
                   	<td>
                     	<table width="100%" border="0" cellspacing="0" cellpadding="0">
                           <tr>
-                            <td width="16%" align="center"><img src="images/mail/6vezes.png"></td>
+                            <td width="16%" align="center"><img src="http://www.mudominhacasa.com.br/images/mail/6vezes.png"></td>
                             <td width="2%">&nbsp;</td>
                             <td width="82%" style="background-color:#FFDAA3">PAGAMENTO FACILITADO <br>
 Todos os produtos da loja podem ser divididos em 6 vezes sem juros!
@@ -103,34 +106,34 @@ Todos os produtos da loja podem ser divididos em 6 vezes sem juros!
                           </tr>
                           <tr><td colspan="3" height="10"></td></tr>
                           <tr> 
-                            <td align="center"><img src="images/mail/comprasegura.png"></td>
+                            <td align="center"><img src="http://www.mudominhacasa.com.br/images/mail/comprasegura.png"></td>
                             <td>&nbsp;</td>
                             <td style="background-color:#FFDAA3">COMPRA SEGURA <br>
-Compra efetuada em ambiente seguro. N„o temos acesso a seus Dados Banc·rios.
+Compra efetuada em ambiente seguro. N√£o temos acesso a seus Dados BancÔøΩrios.
 </td>
                           </tr>
                           <tr><td colspan="3" height="10"></td></tr>
                           <tr>
-                            <td align="center"><img src="images/mail/personalizados.png"></td>
+                            <td align="center"><img src="http://www.mudominhacasa.com.br/images/mail/personalizados.png"></td>
                             <td>&nbsp;</td>
                             <td style="background-color:#FFDAA3">PRODUTOS PERSONALIZADOS<br/>
-N„o encontrou o que procura? Criamos Produtos Exclusivos para vocÍ!
+NÔøΩo encontrou o que procura? Criamos Produtos Exclusivos para voc√™!
 </td>
                           </tr>
                           <tr><td colspan="3" height="10"></td></tr>
                           <tr>
-                            <td align="center"><img src="images/mail/qualidade.png"/></td>
+                            <td align="center"><img src="http://www.mudominhacasa.com.br/images/mail/qualidade.png"/></td>
                             <td>&nbsp;</td>
-                            <td style="background-color:#FFDAA3">QUALIDADE INDISCUTÕVEL<br/>
+                            <td style="background-color:#FFDAA3">QUALIDADE INDISCUT√çVEL<br/>
 Produzido com adesivo ultrafino, de melhor desempenho encontrado no mercado.
 </td>
                           </tr>
                           <tr><td colspan="3" height="10"></td></tr>
                           <tr>
-                            <td align="center"><img  src="images/mail/entrega.png"></td>
+                            <td align="center"><img  src="http://www.mudominhacasa.com.br/images/mail/entrega.png"></td>
                             <td>&nbsp;</td>
-                            <td style="background-color:#FFDAA3">ENTREGA R¡PIDA PARA TODO O BRASIL<br/>
-Entregamos em todo o Brasil via Correios. Escolha a melhor opÁ„o de entrega.
+                            <td style="background-color:#FFDAA3">ENTREGA R√ÅPIDA PARA TODO O BRASIL<br/>
+Entregamos em todo o Brasil via Correios. Escolha a melhor op√ß√£o de entrega.
 </td>
                           </tr>
                         </table>
@@ -138,19 +141,32 @@ Entregamos em todo o Brasil via Correios. Escolha a melhor opÁ„o de entrega.
                     </td>
                   </tr>  
                   <tr><td style="text-align:center; font-size:25px; font-weight:bold">www.mudominhacasa.com.br</td></tr>
-                  <tr><td align="center">Em caso de d˙vidas entre em contato atravÈs do e-mail: atendimento@mudominhacasa.com.br</td></tr>
+                  <tr><td align="center">Em caso de d√∫vidas entre em contato atrav√©s do e-mail: atendimento@mudominhacasa.com.br</td></tr>
                 </table>
 			</td>
 		  </tr>
 		  <tr>
 			<td style="text-align:center; font-size:13px; font-family:Tahoma; padding:10px">
-            Muito obrigado pela sua preferÍncia e compreens„o!<br>
-            Esperamos sua total satisfaÁ„o na aquisiÁ„o do seu produto Mudominhacasa - Adesivos Decorativos
+            Muito obrigado pela sua prefer√™ncia e compreens√£o!<br>
+            Esperamos sua total satisfa√ß√£o na aquisi√ß√£o do seu produto Mudominhacasa - Adesivos Decorativos
             </td>
 		  </tr>
 		</table>';
 		
 		tep_sendMailOrders($dados['email_address'], EMAIL_SUBJECT, $html, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
+
+        $html = '<b>Nome:</b> '.$_POST['firstname'].'<br />
+	 		  <b>E-mail:</b> '.$_POST['email_address'].'<br />
+			  <b>Telefone:</b>'.$_POST['telephone'].'<br />
+			  <b>CEP:</b></td>'.$_POST['postcode'].'<br />
+			  <b>Page Views:</b>'.$_POST['pagaviews'].'<br />
+			  <b>F√£s ou Amigo</b> '.$_POST['fan'].'<br />
+			  <b>URL ou endere√ßo do perfil:</b> '.$_POST['urle'].'<br />
+			  <b>Responsavel pelo Site:</b> '.$_POST['responsavel'].'<br />
+			  <b>Area de Atua√ß√£o:</b> '.$_POST['area'].'<br />
+			  <b>Descri√ß√£o:</b> '.$_POST['desc'].'<br />';
+
+        tep_sendMail('parceiro@mudominhacasa.com.br', 'Parceria '.$_POST['sessao'], $html, $_POST['firstname'], $_POST['email_address']);
 		
 		return array('retorno' => 1);
 	}

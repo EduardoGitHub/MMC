@@ -38,7 +38,7 @@ label.error { margin:2px 0 0 0; color:red;}
 	  <p style="color:#666; font-size:40px; text-align:right; ">Mensagem enviada com Sucesso!</p>
       
       <div class="pagestexto" style="text-align:justify; line-height:25px; font-size:16px">
-      Sua solicitação de parceria foi enviado com sucesso, em breve nossa equipe estará entrando em contato com você. Qualquer dúvida enviar um e-mail para <a href="mailto:atendimento@mudominhacasa.com.br" style="color:#06C">atendimento@mudominhacasa.com.br</a> ou entrar em contato através do número 0800 032 1777. <br />
+      Sua solicitação para o programa de afiliados foi enviado com sucesso, em breve nossa equipe estará entrando em contato com você. Qualquer dúvida enviar um e-mail para <a href="mailto:atendimento@mudominhacasa.com.br" style="color:#06C">atendimento@mudominhacasa.com.br</a> ou entrar em contato através do número 0800 032 1777. <br />
       Agradecemos a preferência.<br /><br />
       Equipe <b>Mudominhacasa.com</b>!
 

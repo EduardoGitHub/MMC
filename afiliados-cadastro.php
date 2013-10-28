@@ -1,5 +1,7 @@
 <?php
   require('includes/application_top.php');
+  require_once('includes/modules/email/class.phpmailer.php');
+  
   $action = $_REQUEST['action'];
 
 	switch ($action){
@@ -8,7 +10,7 @@
 			require_once 'includes/classes/partner.php';
 			$p = new Partner();
 			$r = $p->newPartner($_POST);
-			echo json_encode($r);
+			tep_redirect(tep_href_link('afiliados-sucesso.php', '', 'SSL'));
 			break;
 			
 	}
@@ -223,23 +225,11 @@ label.error { margin:2px 0 0 0; color:red;}
   
   	// valida o formulário
     $('#formAfiliados').validate({
-        // define regras para os campos  
-    	submitHandler: function(form) {   
-    	$(form).ajaxSubmit({
-    		dataType: "json",
-            type: "POST",
-            url: 'actions-json.php',
-    		success: function(data){   
-    			if(data.retorno == 0)
-    				alert('erro')
-    			else if(data.retorno == 1) alert('Salva com sucesso');
-        	}   
-        });
-	return false; 
-}, 
 	rules: {
 		email_address: { required: true,
-						 email: true},
+						 email: true,
+						 remote: "actions-json.php?action=vEmailExist"
+		},
 		email_address_cf: { required: true,
 			equalTo:'#email_address',
 			email: true
@@ -265,7 +255,8 @@ label.error { margin:2px 0 0 0; color:red;}
         // define messages para cada campo
         messages: {
         	email_address: { required: 'Informe seu email.',
-							 email: 'Informe um e-mail válido'},
+							 email: 'Informe um e-mail válido',
+							 remote: 'Este e-mail já existe em nossa base de dados favor informar um novo e-mail.'},
 			email_address_cf: { required: 'Confirme seu e-mail',
 								equalTo:'Seu e-mail não é o mesmo digitado acima. Favor verificar',
 								email: 'Informe um email valido'
